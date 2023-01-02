@@ -10,9 +10,6 @@ import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
-import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
@@ -110,6 +107,21 @@ public class RugyEngine2D {
     public void loop() {
         // Create capabilities, clear the color and initialize shaders
         renderer.initRenderer();
+
+        // TESTS
+        float[] data = new float[] {
+                 0,  1, 0,
+                -1, -1, 0,
+                 1, -1, 0};
+
+        float[] data2 = new float[] {
+                -1,  1, 0,
+                 0, -1, 0,
+                 1,  1, 0};
+
+        renderer.getLoader().createMesh(data, 3);
+        renderer.getLoader().createMesh(data2, 3);
+
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
