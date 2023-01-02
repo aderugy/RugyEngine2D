@@ -20,10 +20,6 @@ public class RugyEngine2D {
     private final Renderer renderer;
     private final InputManager inputManager;
 
-    public static final String VERTEX_SHADER_PATH = "C:\\Users\\Arthur\\Desktop\\Java\\Projects\\RugyEngine2D\\src\\main\\java\\com\\aderugy\\rugyengine2d\\shaders\\shader.vert";
-    public static final String FRAGMENT_SHADER_PATH = "C:\\Users\\Arthur\\Desktop\\Java\\Projects\\RugyEngine2D\\src\\main\\java\\com\\aderugy\\rugyengine2d\\shaders\\shader.frag";
-
-
     public static void main(String[] args) {
         RugyEngine2D engine = new RugyEngine2D();
         engine.run();
@@ -34,6 +30,9 @@ public class RugyEngine2D {
         inputManager = new InputManager();
     }
 
+    /**
+     * Starting the application and freeing memory when closing
+     */
     public void run() {
         System.out.println("Starting LWJGL " + Version.getVersion());
 
@@ -48,6 +47,10 @@ public class RugyEngine2D {
         glfwSetErrorCallback(null).free();
     }
 
+    /**
+     * LWJGL Initialization.
+     * Setting up the window and the callbacks
+     */
     public void init() {
         // Set up an error callback. The default implementation
         // will print the error message in System.err.
@@ -99,11 +102,11 @@ public class RugyEngine2D {
 
         // Make the window visible
         glfwShowWindow(window);
-
-        // Passing the window handle to the renderer
-        renderer.setWindow(window);
     }
 
+    /**
+     * The loop that updates the window
+     */
     public void loop() {
         // Create capabilities, clear the color and initialize shaders
         renderer.initRenderer();
@@ -126,14 +129,14 @@ public class RugyEngine2D {
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         while (!glfwWindowShouldClose(window)) {
-            // Rendering
-            renderer.render();
-
             // Processing user inputs
             inputManager.processInputs();
 
-            // Poll for window events. The key callback above will only be
-            // invoked during this call.
+            // Rendering
+            renderer.render();
+            glfwSwapBuffers(window);
+
+            // Calling events that happened during the last iteration
             glfwPollEvents();
         }
     }
