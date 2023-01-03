@@ -9,8 +9,18 @@ repositories {
     mavenCentral()
 }
 
+import org.gradle.internal.os.OperatingSystem
+
 project.ext.lwjglVersion = "3.3.1"
-project.ext.lwjglNatives = "natives-windows"
+
+switch (OperatingSystem.current()) {
+    case OperatingSystem.LINUX:
+        project.ext.lwjglNatives = "natives-linux"
+        break
+    case OperatingSystem.WINDOWS:
+        project.ext.lwjglNatives = "natives-windows"
+        break
+}
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
