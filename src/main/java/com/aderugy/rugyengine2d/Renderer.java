@@ -2,7 +2,6 @@ package com.aderugy.rugyengine2d;
 
 import com.aderugy.rugyengine2d.shaders.ShaderManager;
 import com.aderugy.rugyengine2d.utils.Log;
-import com.aderugy.rugyengine2d.utils.Utils;
 import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.opengl.ARBVertexArrayObject.glBindVertexArray;
@@ -10,23 +9,28 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 
 public class Renderer {
-    public static final String VERTEX_SHADER_PATH = "C:\\Users\\Arthur\\Desktop\\Java\\Projects\\RugyEngine2D\\src\\main\\java\\com\\aderugy\\rugyengine2d\\shaders\\shader.vert";
-    public static final String FRAGMENT_SHADER_PATH = "C:\\Users\\Arthur\\Desktop\\Java\\Projects\\RugyEngine2D\\src\\main\\java\\com\\aderugy\\rugyengine2d\\shaders\\shader.frag";
-
     private MeshLoader loader;
 
+    /**
+     * Called in the loop that renders the window.
+     * Responsible for the rendering of the next frame.
+     */
     public void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-        for (Mesh mesh :
-                loader.getMeshes()) {
+        // Rendering all the meshes
+        for (Mesh mesh : loader.getMeshes()) {
             glBindVertexArray(mesh.getVaoID());
-            glDrawArrays(GL_TRIANGLES, 0, 3);
+            glDrawArrays(GL_TRIANGLES, 0, mesh.getVertexSize());
         }
 
         // Preparing next images rendering
     }
 
+    /**
+     * Called before starting rendering the window.
+     * Shader compilation and linking, using program and deleting the shaders in the memory.
+     */
     public void initRenderer() {
         String operation = "Initializing the renderer";
         Log.log(operation);
@@ -43,14 +47,16 @@ public class Renderer {
 
         // Compiling the shaders
         ShaderManager shaderManager = new ShaderManager();
-        int vert = shaderManager.compile(VERTEX_SHADER_PATH, GL_VERTEX_SHADER);
-        int frag = shaderManager.compile(FRAGMENT_SHADER_PATH, GL_FRAGMENT_SHADER);
+        int vert = shaderManager.compile(ResourceManager.getShader("shader.vert"), GL_VERTEX_SHADER);
+        int frag = shaderManager.compile(ResourceManager.getShader("shader.frag"), GL_FRAGMENT_SHADER);
 
         // Linking the shaders
         int program = shaderManager.link(new int[]{vert, frag});
 
         // Using the program
         glUseProgram(program);
+
+        // Deleting shaders (not useful anymore)
         glDeleteShader(vert);
         glDeleteShader(frag);
 

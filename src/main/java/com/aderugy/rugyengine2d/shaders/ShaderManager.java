@@ -2,19 +2,16 @@ package com.aderugy.rugyengine2d.shaders;
 
 import com.aderugy.rugyengine2d.utils.Log;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import static org.lwjgl.opengl.GL20.*;
 
 public class ShaderManager {
 
-    public int compile(String path, int type) {
+    public int compile(File path, int type) {
         String shaderType = getShaderName(type);
 
-        Log.log("Compiling " + shaderType + " shader '" + path + "'");
+        Log.log("Compiling " + shaderType + " shader '" + path.getPath() + "'");
         StringBuilder shaderContent = new StringBuilder();
 
         try {
@@ -27,7 +24,7 @@ public class ShaderManager {
             Log.success("Reading shader source code");
         }
         catch (FileNotFoundException e) {
-            Log.err("No such shader '" + path + "'");
+            Log.err("No such shader '" + path.getPath() + "'");
         }
         catch (IOException e) {
             Log.err("Reading shader source code failed");
