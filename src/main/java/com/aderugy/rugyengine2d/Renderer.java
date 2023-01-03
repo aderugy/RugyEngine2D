@@ -10,6 +10,7 @@ import static org.lwjgl.opengl.GL20.*;
 
 public class Renderer {
     private MeshLoader loader;
+    private int program;
 
     /**
      * Called in the loop that renders the window.
@@ -21,7 +22,7 @@ public class Renderer {
         // Rendering all the meshes
         for (Mesh mesh : loader.getMeshes()) {
             glBindVertexArray(mesh.getVaoID());
-            glDrawArrays(GL_TRIANGLES, 0, mesh.getVertexSize());
+            glDrawArrays(GL_TRIANGLES, 0, mesh.getVerticesCount());
         }
 
         // Preparing next images rendering
@@ -51,7 +52,7 @@ public class Renderer {
         int frag = shaderManager.compile(ResourceManager.getShader("shader.frag"), GL_FRAGMENT_SHADER);
 
         // Linking the shaders
-        int program = shaderManager.link(new int[]{vert, frag});
+        program = shaderManager.link(new int[]{vert, frag});
 
         // Using the program
         glUseProgram(program);

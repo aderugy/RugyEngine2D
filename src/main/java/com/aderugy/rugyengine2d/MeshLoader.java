@@ -20,7 +20,7 @@ public class MeshLoader {
 
     public Mesh createMesh(float[] vertices, int size) {
         int vao = genVAO();
-        storeData(0, size, vertices);
+        storeData(size, vertices);
         glBindVertexArray(0);
 
         Mesh mesh = new Mesh(vao, size);
@@ -28,26 +28,37 @@ public class MeshLoader {
         return mesh;
     }
 
-    private void storeData(int attribute, int size, float[] data) {
+    private void storeData(int size, float[] data) {
         // Generate the VBO
         genVBO();
 
         // Store the data in the buffer
         FloatBuffer buffer = Utils.createFloatBuffer(data);
         glBufferData(GL_ARRAY_BUFFER, buffer, GL_STATIC_DRAW);
-        glVertexAttribPointer(attribute, size, GL_FLOAT, false, size * Float.BYTES, 0);
+        glVertexAttribPointer(0, size, GL_FLOAT, false, 6 * Float.BYTES, 0);
         glEnableVertexAttribArray(0);
+
+        glVertexAttribPointer(1, size, GL_FLOAT, false, 6 * Float.BYTES, 12);
+        glEnableVertexAttribArray(1);
 
         // Unbind the buffer
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
+    /**
+     * Creates and binds a Vertex Buffer Object.
+     * @return ID of the generated VBO
+     */
     private int genVBO() {
         int vbo = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         return vbo;
     }
 
+    /**
+     * Creates and binds a Vertex Array Object.
+     * @return ID of the generated VAO
+     */
     private int genVAO() {
         int vao = glGenVertexArrays();
         glBindVertexArray(vao);

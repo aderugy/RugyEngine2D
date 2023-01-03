@@ -1,9 +1,7 @@
 package com.aderugy.rugyengine2d;
 
-import com.aderugy.rugyengine2d.shaders.ShaderManager;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
 import java.nio.IntBuffer;
@@ -113,17 +111,11 @@ public class RugyEngine2D {
 
         // TESTS
         float[] data = new float[] {
-                 0,  1, 0,
-                -1, -1, 0,
-                 1, -1, 0};
-
-        float[] data2 = new float[] {
-                -1,  1, 0,
-                 0, -1, 0,
-                 1,  1, 0};
+                 0,  1, 0, 0, 0, 0,
+                -1, -1, 0, 0, 1, 0,
+                 1, -1, 0, 0, 0, 1};
 
         renderer.getLoader().createMesh(data, 3);
-        renderer.getLoader().createMesh(data2, 3);
 
 
         // Run the rendering loop until the user has attempted to close

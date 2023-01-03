@@ -2,18 +2,18 @@ package com.aderugy.rugyengine2d;
 
 public class Mesh {
     private final int vaoID;
-    private final int vertexSize;
+    private final int verticesCount;
 
     public Mesh(int vao, int vertexSize) {
         this.vaoID = vao;
-        this.vertexSize = vertexSize;
+        this.verticesCount = vertexSize;
     }
 
     public int getVaoID() {
         return vaoID;
     }
 
-    public int getVertexSize() {
-        return vertexSize;
+    public int getVerticesCount() {
+        return verticesCount;
     }
 }
