@@ -31,6 +31,15 @@ public class ResourceManager {
     }
 
     /**
+     * Returns the associated image (in resources/image)
+     * @param filename name of the image
+     * @return File corresponding to the associated image
+     */
+    public static File getImage(String filename) {
+        return getInstance().getResource("images/" + filename);
+    }
+
+    /**
      * @throws RuntimeException file not found
      * @param path path to the seeked resource.
      * @return File corresponding to the seeked resource.

@@ -21,6 +21,7 @@ public class Renderer {
 
         // Rendering all the meshes
         for (Mesh mesh : loader.getMeshes()) {
+            glBindTexture(GL_TEXTURE_2D, 1);
             glBindVertexArray(mesh.getVaoID());
             glDrawArrays(GL_TRIANGLES, 0, mesh.getVerticesCount());
         }

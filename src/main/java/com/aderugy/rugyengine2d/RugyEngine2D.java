@@ -110,12 +110,15 @@ public class RugyEngine2D {
         renderer.initRenderer();
 
         // TESTS
-        float[] data = new float[] {
-                 0,  1, 0, 0, 0, 0,
-                -1, -1, 0, 0, 1, 0,
-                 1, -1, 0, 0, 0, 1};
+        float[] data = {
+                // positions          // colors           // texture coords
+                0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+                0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+                -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+                -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
+        };
 
-        renderer.getLoader().createMesh(data, 3);
+        renderer.getLoader().createMesh(data, 4);
 
 
         // Run the rendering loop until the user has attempted to close

@@ -10,3 +10,4 @@ Day2:
 - Added a ResourceManager class to centralize the access to resources files
 - Added linux natives dependencies in gradle build
 - Vertex shader can now take a color parameter. We can therefore draw nice rainbow triangles!
+- Rendered triangles of textures (ugly code, has to be refactored next time)
