@@ -6,4 +6,7 @@ Progression:
 Day1:
 - Discovering LWJGL interface, dive into low-level Java programming
 - Can only draw red triangles.
-Possible errors for next updates: is glUseProgram() mandatory for every frame ?
+Day2:
+- Added a ResourceManager class to centralize the access to resources files
+- Added linux natives dependencies in gradle build
+- Vertex shader can now take a color parameter. We can therefore draw nice rainbow triangles!
