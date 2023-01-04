@@ -26,8 +26,8 @@ public class ResourceManager {
      * @param filename name of the shader file
      * @return File corresponding to the associated shader
      */
-    public static File getShader(String filename) {
-        return getInstance().getResource("shaders/" + filename);
+    public static File getShader(String filename, String ext) {
+        return getInstance().getResource("shaders/" + filename + "/" + filename + ext);
     }
 
     /**

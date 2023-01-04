@@ -1,14 +1,42 @@
 package com.aderugy.rugyengine2d.shaders;
 
+import com.aderugy.rugyengine2d.ResourceManager;
 import com.aderugy.rugyengine2d.utils.Log;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import static org.lwjgl.opengl.GL20.*;
 
 public class ShaderManager {
+    private static ShaderManager instance = null;
+    public final int SHAPE_SHADER_PROGRAM;
+    public final int TEXTURE_SHADER_PROGRAM;
 
-    public int compile(File path, int type) {
+    public static ShaderManager getInstance() {
+        if (instance == null) instance = new ShaderManager();
+
+        return instance;
+    }
+
+    private ShaderManager() {
+        SHAPE_SHADER_PROGRAM = createShaderProgram("shape");
+        TEXTURE_SHADER_PROGRAM = createShaderProgram("texture");
+    }
+
+    private int createShaderProgram(String name) {
+        int vertexID = compile(ResourceManager.getShader(name, ".vert"), GL_VERTEX_SHADER);
+        int fragmentID = compile(ResourceManager.getShader(name, ".frag"), GL_FRAGMENT_SHADER);
+
+        int program = link(new int[] {vertexID, fragmentID});
+
+        glDeleteShader(vertexID);
+        glDeleteShader(fragmentID);
+
+        return program;
+    }
+
+    private int compile(File path, int type) {
         String shaderType = getShaderName(type);
 
         Log.log("Compiling " + shaderType + " shader '" + path.getPath() + "'");
@@ -46,7 +74,7 @@ public class ShaderManager {
         throw new IllegalStateException();
     }
 
-    public int link(int[] shaders) {
+    private int link(int[] shaders) {
         String operation = "Linking shaders";
 
         Log.log(operation);

@@ -8,6 +8,7 @@ import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.stb.STBImage.stbi_set_flip_vertically_on_load;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
@@ -100,6 +101,9 @@ public class RugyEngine2D {
 
         // Make the window visible
         glfwShowWindow(window);
+
+        // Flipping the open gl images on load (so they are not inverted when rendering)
+        stbi_set_flip_vertically_on_load(true);
     }
 
     /**
@@ -108,18 +112,6 @@ public class RugyEngine2D {
     public void loop() {
         // Create capabilities, clear the color and initialize shaders
         renderer.initRenderer();
-
-        // TESTS
-        float[] data = {
-                // positions          // colors           // texture coords
-                0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-                0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-                -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-                -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
-        };
-
-        renderer.getLoader().createMesh(data, 4);
-
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.

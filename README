@@ -11,3 +11,8 @@ Day2:
 - Added linux natives dependencies in gradle build
 - Vertex shader can now take a color parameter. We can therefore draw nice rainbow triangles!
 - Rendered triangles of textures (ugly code, has to be refactored next time)
+Day3:
+- Very nice refactoring!
+- Created a 'component' package: everything that will be drawn will be a component.
+- It is now possible to draw shapes or images with a single function call
+- I will have to rewrite it though by implementing a new coordinates system and cleaning a bit the code
