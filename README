@@ -16,3 +16,4 @@ Day3:
 - Created a 'component' package: everything that will be drawn will be a component.
 - It is now possible to draw shapes or images with a single function call
 - I will have to rewrite it though by implementing a new coordinate system and cleaning a bit the code
+Project paused: learning about linear algebra before resuming
