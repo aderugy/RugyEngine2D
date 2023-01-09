@@ -24,3 +24,7 @@ Day5:
 - I think it would be more interesting to do some 3D graphics instead, so I changed the project name
 - Added a Transform class that will handle the coordinates , dimensions and coordinates of my game objects.
 - I really have to refactor this, it's getting messy with the new projection stuff
+Day6:
+- Refactoring: 
+  - Component -> GameObject
+  - ShaderManager -> ShaderProgram (not a singleton class anymore, each instance now corresponds to a shader program.
