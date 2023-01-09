@@ -2,7 +2,7 @@ package com.aderugy.rugyengine2d.components.shapes;
 
 import com.aderugy.rugyengine2d.components.Color;
 import com.aderugy.rugyengine2d.components.Component;
-import com.aderugy.rugyengine2d.components.Position;
+import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.utils.Utils;
 
 import java.nio.FloatBuffer;

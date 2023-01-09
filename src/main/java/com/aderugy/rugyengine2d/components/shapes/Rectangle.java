@@ -1,7 +1,7 @@
 package com.aderugy.rugyengine2d.components.shapes;
 
 import com.aderugy.rugyengine2d.components.Color;
-import com.aderugy.rugyengine2d.components.Position;
+import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.shaders.ShaderManager;
 
 import static org.lwjgl.opengl.GL11.*;
