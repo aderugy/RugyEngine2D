@@ -1,4 +1,4 @@
-2D Java Game Engine built upon LWJGL, for a personnal project.
+3D Java Game Engine built upon LWJGL, for a personnal project.
 
 Starting date: January 1st, 2023
 Each day corresponds to a day of work.
@@ -19,3 +19,8 @@ Day3:
 - I will have to rewrite it though by implementing a new coordinate system and cleaning a bit the code
 Day4:
 - Learning about linear algebra, matrices: vital to understand the transformations that we will apply to our components
+Day5:
+- Added JOML (math library)
+- I think it would be more interesting to do some 3D graphics instead, so I changed the project name
+- Added a Transform class that will handle the coordinates , dimensions and coordinates of my game objects.
+- I really have to refactor this, it's getting messy with the new projection stuff
