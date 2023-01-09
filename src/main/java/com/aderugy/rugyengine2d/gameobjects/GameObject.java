@@ -57,4 +57,8 @@ public abstract class GameObject {
     public int getEboID() {
         return eboID;
     }
+
+    public Transform getTransform() {
+        return transform;
+    }
 }

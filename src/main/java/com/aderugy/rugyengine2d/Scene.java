@@ -1,6 +1,8 @@
 package com.aderugy.rugyengine2d;
 
 import com.aderugy.rugyengine2d.gameobjects.GameObject;
+import com.aderugy.rugyengine2d.geom.Transform;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 

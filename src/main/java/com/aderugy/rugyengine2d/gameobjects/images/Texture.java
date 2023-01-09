@@ -6,6 +6,7 @@ import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.geom.Transform;
 import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Utils;
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 
 import java.nio.ByteBuffer;
@@ -29,10 +30,15 @@ public class Texture extends GameObject {
     private Position[] positions;
     private static final int[] indices = new int[] { 0, 1, 3, 1, 2, 3 };
 
-    public Texture(ShaderProgram shaderProgram, String filename, Position a, Position b, Position c, Position d, Position texA, Position texB, Position texC, Position texD) {
+    public Texture(ShaderProgram shaderProgram, String filename, Position a, Position b, Position c, Position d) {
         super(shaderProgram);
 
         transform = new Transform(1, 1);
+
+        Position texA = new Position(1.0f, 1.0f);
+        Position texB = new Position(1.0f, 0.0f);
+        Position texC = new Position(0.0f, 0.0f);
+        Position texD = new Position(0.0f, 1.0f);
 
         this.filename = filename;
         this.textureID = glGenTextures();
@@ -64,7 +70,7 @@ public class Texture extends GameObject {
 
             data[index] = cur.getX();
             data[index + 1] = cur.getY();
-            data[index + 2] = 0;
+            data[index + 2] = cur.getZ();
             data[index + 3] = tex.getX();
             data[index + 4] = tex.getY();
         }

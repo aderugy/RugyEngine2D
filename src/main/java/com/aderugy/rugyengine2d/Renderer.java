@@ -1,5 +1,6 @@
 package com.aderugy.rugyengine2d;
 
+import com.aderugy.rugyengine2d.gameobjects.shapes.Rectangle;
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.gameobjects.images.Texture;
 import com.aderugy.rugyengine2d.shaders.ShaderProgram;
@@ -47,13 +48,7 @@ public class Renderer {
                 new Position(0.5f, 0.5f),
                 new Position(0.5f, -0.5f),
                 new Position(-0.5f, -0.5f),
-                new Position(-0.5f, 0.5f),
-                new Position(1.0f, 1.0f),
-                new Position(1.0f, 0.0f),
-                new Position(0.0f, 0.0f),
-                new Position(0.0f, 1.0f)));
-
-
+                new Position(-0.5f, 0.5f)));
 
         Log.success(operation);
     }

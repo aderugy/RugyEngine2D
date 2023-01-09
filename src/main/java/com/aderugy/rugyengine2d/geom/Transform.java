@@ -45,7 +45,14 @@ public class Transform {
     }
 
     public void scale(float factor, Vector3f axis) {
-        transformMatrix.scale(axis.x * factor, axis.y * factor, axis.z * factor);
+        float xFactor = axis == Transform.X_AXIS ? factor : 1;
+        float yFactor = axis == Transform.Y_AXIS ? factor : 1;
+        float zFactor = axis == Transform.Z_AXIS ? factor : 1;
+        transformMatrix.scale(xFactor, yFactor, zFactor);
+    }
+
+    public void translate(Vector3f offset) {
+        transformMatrix.translate(offset);
     }
 
     public void rotateDeg(float degrees, Vector3f axis) {
