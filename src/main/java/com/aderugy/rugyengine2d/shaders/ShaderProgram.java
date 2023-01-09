@@ -4,24 +4,14 @@ import com.aderugy.rugyengine2d.ResourceManager;
 import com.aderugy.rugyengine2d.utils.Log;
 
 import java.io.*;
-import java.util.ArrayList;
 
 import static org.lwjgl.opengl.GL20.*;
 
-public class ShaderManager {
-    private static ShaderManager instance = null;
-    public final int SHAPE_SHADER_PROGRAM;
-    public final int TEXTURE_SHADER_PROGRAM;
+public class ShaderProgram {
+    private int shaderProgramID;
 
-    public static ShaderManager getInstance() {
-        if (instance == null) instance = new ShaderManager();
-
-        return instance;
-    }
-
-    private ShaderManager() {
-        SHAPE_SHADER_PROGRAM = createShaderProgram("shape");
-        TEXTURE_SHADER_PROGRAM = createShaderProgram("texture");
+    public ShaderProgram(String name) {
+        this.shaderProgramID = createShaderProgram(name);
     }
 
     private int createShaderProgram(String name) {
@@ -103,5 +93,9 @@ public class ShaderManager {
             default -> shaderType = "";
         }
         return shaderType;
+    }
+
+    public int getShaderProgramID() {
+        return shaderProgramID;
     }
 }

@@ -1,4 +1,4 @@
-package com.aderugy.rugyengine2d.components;
+package com.aderugy.rugyengine2d.gameobjects;
 
 public class Color {
     float r, g, b, a;

@@ -1,10 +1,10 @@
-package com.aderugy.rugyengine2d.components.images;
+package com.aderugy.rugyengine2d.gameobjects.images;
 
 import com.aderugy.rugyengine2d.ResourceManager;
-import com.aderugy.rugyengine2d.components.Component;
+import com.aderugy.rugyengine2d.gameobjects.GameObject;
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.geom.Transform;
-import com.aderugy.rugyengine2d.shaders.ShaderManager;
+import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Utils;
 import org.lwjgl.BufferUtils;
 
@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL30C.glBindVertexArray;
 import static org.lwjgl.stb.STBImage.stbi_image_free;
 import static org.lwjgl.stb.STBImage.stbi_load;
 
-public class Texture extends Component {
+public class Texture extends GameObject {
     private static final int VERTEX_SIZE = 5;
 
     private int textureID;
@@ -29,8 +29,8 @@ public class Texture extends Component {
     private Position[] positions;
     private static final int[] indices = new int[] { 0, 1, 3, 1, 2, 3 };
 
-    public Texture(String filename, Position a, Position b, Position c, Position d, Position texA, Position texB, Position texC, Position texD) {
-        super();
+    public Texture(ShaderProgram shaderProgram, String filename, Position a, Position b, Position c, Position d, Position texA, Position texB, Position texC, Position texD) {
+        super(shaderProgram);
 
         transform = new Transform(1, 1);
 
@@ -43,7 +43,7 @@ public class Texture extends Component {
 
     @Override
     public void draw() {
-        glUseProgram(ShaderManager.getInstance().TEXTURE_SHADER_PROGRAM);
+        glUseProgram(shaderProgram.getShaderProgramID());
         glBindTexture(GL_TEXTURE_2D, textureID);
         glBindVertexArray(vaoID);
 
@@ -73,7 +73,7 @@ public class Texture extends Component {
 
     @Override
     protected void render(Position[] vertexPositions, int[] indices) {
-        glUseProgram(ShaderManager.getInstance().TEXTURE_SHADER_PROGRAM);
+        glUseProgram(shaderProgram.getShaderProgramID());
 
         // Binding VAO and VBO
         glBindVertexArray(vaoID);

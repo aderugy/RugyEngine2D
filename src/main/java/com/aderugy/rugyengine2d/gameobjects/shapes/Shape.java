@@ -1,8 +1,9 @@
-package com.aderugy.rugyengine2d.components.shapes;
+package com.aderugy.rugyengine2d.gameobjects.shapes;
 
-import com.aderugy.rugyengine2d.components.Color;
-import com.aderugy.rugyengine2d.components.Component;
+import com.aderugy.rugyengine2d.gameobjects.Color;
+import com.aderugy.rugyengine2d.gameobjects.GameObject;
 import com.aderugy.rugyengine2d.geom.Position;
+import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Utils;
 
 import java.nio.FloatBuffer;
@@ -13,9 +14,10 @@ import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL30C.glBindVertexArray;
 
-public abstract class Shape extends Component {
+public abstract class Shape extends GameObject {
     protected Color color;
-    protected Shape() {
+    protected Shape(ShaderProgram shaderProgram) {
+        super(shaderProgram);
         this.color = new Color();
     }
 
@@ -56,7 +58,8 @@ public abstract class Shape extends Component {
         glEnableVertexAttribArray(1);
     }
 
-    protected Shape(Color color) {
+    protected Shape(ShaderProgram shaderProgram, Color color) {
+        super(shaderProgram);
         this.color = color;
     }
 }

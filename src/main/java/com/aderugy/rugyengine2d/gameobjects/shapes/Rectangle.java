@@ -1,8 +1,8 @@
-package com.aderugy.rugyengine2d.components.shapes;
+package com.aderugy.rugyengine2d.gameobjects.shapes;
 
-import com.aderugy.rugyengine2d.components.Color;
+import com.aderugy.rugyengine2d.gameobjects.Color;
 import com.aderugy.rugyengine2d.geom.Position;
-import com.aderugy.rugyengine2d.shaders.ShaderManager;
+import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.GL_ELEMENT_ARRAY_BUFFER;
@@ -23,7 +23,7 @@ public class Rectangle extends Shape {
 
     @Override
     public void draw() {
-        glUseProgram(ShaderManager.getInstance().SHAPE_SHADER_PROGRAM);
+        glUseProgram(ShaderProgram.getInstance().SHAPE_SHADER_PROGRAM);
         glBindVertexArray(vaoID);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboID);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

@@ -1,8 +1,8 @@
-package com.aderugy.rugyengine2d.components;
+package com.aderugy.rugyengine2d.gameobjects;
 
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.geom.Transform;
-import com.aderugy.rugyengine2d.shaders.ShaderManager;
+import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Utils;
 
 import java.nio.FloatBuffer;
@@ -13,13 +13,14 @@ import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
-public abstract class Component {
+public abstract class GameObject {
     protected Transform transform;
-
+    protected ShaderProgram shaderProgram;
     protected int vaoID;
     protected int eboID;
 
-    protected Component() {
+    protected GameObject(ShaderProgram shaderProgram) {
+        this.shaderProgram = shaderProgram;
         vaoID = glGenVertexArrays();
         eboID = glGenBuffers();
     }
@@ -45,7 +46,7 @@ public abstract class Component {
         FloatBuffer transformBuffer = transform.getProjection();
 
         // Passing the transform matrix
-        int transformLocation = glGetUniformLocation(ShaderManager.getInstance().TEXTURE_SHADER_PROGRAM, "transform");
+        int transformLocation = glGetUniformLocation(shaderProgram.getShaderProgramID(), "transform");
         glUniformMatrix4fv(transformLocation, false, transformBuffer);
     }
 

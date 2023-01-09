@@ -1,8 +1,8 @@
 package com.aderugy.rugyengine2d;
 
 import com.aderugy.rugyengine2d.geom.Position;
-import com.aderugy.rugyengine2d.components.Scene;
-import com.aderugy.rugyengine2d.components.images.Texture;
+import com.aderugy.rugyengine2d.gameobjects.images.Texture;
+import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Log;
 import org.lwjgl.opengl.GL;
 
@@ -42,6 +42,7 @@ public class Renderer {
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
         Scene.getInstance().addComponent(new Texture(
+                new ShaderProgram("texture"),
                 "sprite.png",
                 new Position(0.5f, 0.5f),
                 new Position(0.5f, -0.5f),

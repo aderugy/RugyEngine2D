@@ -1,34 +1,36 @@
-package com.aderugy.rugyengine2d.components;
+package com.aderugy.rugyengine2d;
+
+import com.aderugy.rugyengine2d.gameobjects.GameObject;
 
 import java.util.ArrayList;
 
 public class Scene {
-    private ArrayList<Component> visibleComponents;
-    private ArrayList<Component> hiddenComponents;
+    private ArrayList<GameObject> visibleComponents;
+    private ArrayList<GameObject> hiddenComponents;
 
     private static Scene instance = null;
 
     public void drawComponents() {
-        for (Component component : visibleComponents) {
+        for (GameObject component : visibleComponents) {
             component.draw();
         }
     }
 
-    public void addComponent(Component c) {
+    public void addComponent(GameObject c) {
         visibleComponents.add(c);
     }
 
     private void setVisible(int vaoID, boolean visibility) {
-        Component removed = removeByVao(vaoID, !visibility);
+        GameObject removed = removeByVao(vaoID, !visibility);
         if (removed == null) return;
 
         (visibility ? visibleComponents : hiddenComponents).add(removed);
     }
 
-    private Component removeByVao(int vaoID, boolean visibility) {
-        ArrayList<Component> searchArea = visibility ? visibleComponents : hiddenComponents;
+    private GameObject removeByVao(int vaoID, boolean visibility) {
+        ArrayList<GameObject> searchArea = visibility ? visibleComponents : hiddenComponents;
 
-        for (Component c : searchArea) {
+        for (GameObject c : searchArea) {
             if (c.getVaoID() == vaoID) searchArea.remove(c);
             return c;
         }
