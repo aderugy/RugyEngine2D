@@ -1,10 +1,9 @@
 package com.aderugy.rugyengine2d;
 
 import com.aderugy.rugyengine2d.gameobjects.materials.TextureMaterial;
+import com.aderugy.rugyengine2d.gameobjects.primitives.Cube;
 import com.aderugy.rugyengine2d.gameobjects.primitives.Rectangle;
-import com.aderugy.rugyengine2d.gameobjects.textures.TexturedCube;
 import com.aderugy.rugyengine2d.geom.Position;
-import com.aderugy.rugyengine2d.gameobjects.textures.Texture;
 import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Log;
 import org.lwjgl.opengl.GL;
@@ -56,11 +55,7 @@ public class Renderer {
          */
 
         ShaderProgram textured = new ShaderProgram("texture");
-        Scene.getInstance().addComponent(new Rectangle(new TextureMaterial("sprite.png", textured, 2, 36),
-                new Position(-0.5f, -0.5f),
-                new Position(-0.5f, 0.5f),
-                new Position(0.5f, 0.5f),
-                new Position(0.5f, -0.5f)));
+        Scene.getInstance().addComponent(new Cube(new TextureMaterial("sprite.png", textured, 2, 36)));
 
         Log.success(operation);
     }

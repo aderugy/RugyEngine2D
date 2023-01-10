@@ -1,11 +1,9 @@
-package com.aderugy.rugyengine2d.gameobjects.textures;
+package com.aderugy.rugyengine2d.gameobjects.primitives;
 
 import com.aderugy.rugyengine2d.gameobjects.GameObject;
 import com.aderugy.rugyengine2d.gameobjects.materials.Material;
-import com.aderugy.rugyengine2d.gameobjects.materials.TextureMaterial;
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.geom.Transform;
-import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Utils;
 import org.joml.Vector3f;
 
@@ -16,9 +14,9 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30C.glBindVertexArray;
 
-public class TexturedCube extends GameObject {
+public class Cube extends GameObject {
 
-    public TexturedCube(Material material) {
+    public Cube(Material material) {
         super(material);
 
         transform = new Transform(1, 1);

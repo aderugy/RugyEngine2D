@@ -1,5 +1,12 @@
 package com.aderugy.rugyengine2d.gameobjects.vertices;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static org.lwjgl.opengl.GL11.GL_FALSE;
+import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
+import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
+
 public class Vertex {
     private VertexData[] vertexData;
     private int length;
@@ -44,5 +51,15 @@ public class Vertex {
 
     public VertexData[] getVertexData() {
         return vertexData;
+    }
+
+    public static Vertex merge(Vertex... vertices) {
+        ArrayList<VertexData> mergedVertices = new ArrayList<>();
+
+        for (Vertex v : vertices) {
+            mergedVertices.addAll(Arrays.asList(v.vertexData));
+        }
+
+        return new Vertex((VertexData[]) mergedVertices.toArray());
     }
 }

@@ -3,6 +3,8 @@ package com.aderugy.rugyengine2d.gameobjects.primitives;
 import com.aderugy.rugyengine2d.gameobjects.Color;
 import com.aderugy.rugyengine2d.gameobjects.GameObject;
 import com.aderugy.rugyengine2d.gameobjects.materials.Material;
+import com.aderugy.rugyengine2d.gameobjects.vertices.Vertex;
+import com.aderugy.rugyengine2d.gameobjects.vertices.VertexData;
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Utils;
@@ -23,68 +25,7 @@ public abstract class Shape extends GameObject {
 
     @Override
     protected float[] genData(Position[] pos) {
-        float[] vertices = new float[]{
-                -0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f, -0.5f,
-                0.5f, 0.5f, -0.5f,
-
-                0.5f, 0.5f, -0.5f,
-                -0.5f, 0.5f, -0.5f,
-                -0.5f, -0.5f, -0.5f,
-
-                -0.5f, -0.5f, 0.5f,
-                0.5f, -0.5f, 0.5f,
-                0.5f, 0.5f, 0.5f,
-
-                0.5f, 0.5f, 0.5f,
-                -0.5f, 0.5f, 0.5f,
-                -0.5f, -0.5f, 0.5f,
-
-                -0.5f, 0.5f, 0.5f,
-                -0.5f, 0.5f, -0.5f,
-                -0.5f, -0.5f, -0.5f,
-
-                -0.5f, -0.5f, -0.5f,
-                -0.5f, -0.5f, 0.5f,
-                -0.5f, 0.5f, 0.5f,
-
-                0.5f, 0.5f, 0.5f,
-                0.5f, 0.5f, -0.5f,
-                0.5f, -0.5f, -0.5f,
-
-                0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f, 0.5f,
-                0.5f, 0.5f, 0.5f,
-
-                -0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f, -0.5f,
-                0.5f, -0.5f, 0.5f,
-
-                0.5f, -0.5f, 0.5f,
-                -0.5f, -0.5f, 0.5f,
-                -0.5f, -0.5f, -0.5f,
-
-                -0.5f, 0.5f, -0.5f,
-                0.5f, 0.5f, -0.5f,
-                0.5f, 0.5f, 0.5f,
-
-                0.5f, 0.5f, 0.5f,
-                -0.5f, 0.5f, 0.5f,
-                -0.5f, 0.5f, -0.5f
-        };
-
-        float[] materialData = material.getMaterialData();
-
-        float[] data = new float[materialData.length + vertices.length];
-        for (int i = 0; i < vertices.length / 3; i++) {
-            data[5 * i] = vertices[3 * i];
-            data[5 * i + 1] = vertices[3 * i + 1];
-            data[5 * i + 2] = vertices[3 * i + 2];
-            data[5 * i + 3] = materialData[2 * i];
-            data[5 * i + 4] = materialData[2 * i + 1];
-        }
-
-        return data;
+        return null;
     }
 
     @Override
