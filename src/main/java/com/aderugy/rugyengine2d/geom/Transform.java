@@ -12,64 +12,64 @@ public class Transform {
     public static final Vector3f Y_AXIS = new Vector3f(0, 1, 0);
     public static final Vector3f Z_AXIS = new Vector3f(0, 0, 1);
 
-    private Matrix4f transformMatrix;
+    private Matrix4f modelMatrix;
     private Position coordinates;
     private Dimension dimension;
 
     public Transform(float width, float height) {
         this.coordinates = new Position();
         this.dimension = new Dimension(width, height, 0);
-        this.transformMatrix = new Matrix4f();
+        this.modelMatrix = new Matrix4f();
     }
 
     public Transform(float width, float height, float length) {
         this.coordinates = new Position();
         this.dimension = new Dimension(width, height, length);
-        this.transformMatrix = new Matrix4f();
+        this.modelMatrix = new Matrix4f();
     }
 
     public Transform(Dimension dimension) {
         this.coordinates = new Position();
         this.dimension = dimension;
-        this.transformMatrix = new Matrix4f();
+        this.modelMatrix = new Matrix4f();
     }
 
     public Transform(Position coordinates, Dimension dimension) {
         this.coordinates = coordinates;
         this.dimension = dimension;
-        transformMatrix = new Matrix4f();
+        modelMatrix = new Matrix4f();
     }
 
     public void scale(float factor) {
-        transformMatrix.scale(factor);
+        modelMatrix.scale(factor);
     }
 
     public void scale(float factor, Vector3f axis) {
         float xFactor = axis == Transform.X_AXIS ? factor : 1;
         float yFactor = axis == Transform.Y_AXIS ? factor : 1;
         float zFactor = axis == Transform.Z_AXIS ? factor : 1;
-        transformMatrix.scale(xFactor, yFactor, zFactor);
+        modelMatrix.scale(xFactor, yFactor, zFactor);
     }
 
     public void translate(Vector3f offset) {
-        transformMatrix.translate(offset);
+        modelMatrix.translate(offset);
     }
 
     public void rotateDeg(float degrees, Vector3f axis) {
-        transformMatrix.rotate(Math.toRadians(degrees), axis);
+        modelMatrix.rotate(Math.toRadians(degrees), axis);
     }
 
     public void rotateRad(float radians, Vector3f axis) {
-        transformMatrix.rotate(radians, axis);
+        modelMatrix.rotate(radians, axis);
     }
 
-    public Matrix4f getTransformMatrix() {
-        return transformMatrix;
+    public Matrix4f getModelMatrix() {
+        return modelMatrix;
     }
 
     public FloatBuffer getProjection() {
         FloatBuffer projectionBuffer = BufferUtils.createFloatBuffer(16);
-        transformMatrix.get(projectionBuffer);
+        modelMatrix.get(projectionBuffer);
         return projectionBuffer;
     }
 

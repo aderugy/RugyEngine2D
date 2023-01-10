@@ -1,39 +1,35 @@
 package com.aderugy.rugyengine2d;
 
+import com.aderugy.rugyengine2d.gameobjects.Camera;
 import com.aderugy.rugyengine2d.gameobjects.GameObject;
-import com.aderugy.rugyengine2d.geom.Transform;
-import org.joml.Vector3f;
+import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class Scene {
-    private ArrayList<GameObject> visibleComponents;
-    private ArrayList<GameObject> hiddenComponents;
+    private ArrayList<GameObject> gameObjects;
+    private Camera camera;
+
 
     private static Scene instance = null;
 
     public void drawComponents() {
-        for (GameObject component : visibleComponents) {
+        for (GameObject component : gameObjects) {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            camera.loadMatrices(component.getShaderProgram().getShaderProgramID());
             component.draw();
         }
     }
 
     public void addComponent(GameObject c) {
-        visibleComponents.add(c);
-    }
-
-    private void setVisible(int vaoID, boolean visibility) {
-        GameObject removed = removeByVao(vaoID, !visibility);
-        if (removed == null) return;
-
-        (visibility ? visibleComponents : hiddenComponents).add(removed);
+        gameObjects.add(c);
     }
 
     private GameObject removeByVao(int vaoID, boolean visibility) {
-        ArrayList<GameObject> searchArea = visibility ? visibleComponents : hiddenComponents;
-
-        for (GameObject c : searchArea) {
-            if (c.getVaoID() == vaoID) searchArea.remove(c);
+        for (GameObject c : gameObjects) {
+            if (c.getVaoID() == vaoID) gameObjects.remove(c);
             return c;
         }
 
@@ -41,8 +37,8 @@ public class Scene {
     }
 
     private Scene() {
-        visibleComponents = new ArrayList<>();
-        hiddenComponents = new ArrayList<>();
+        gameObjects = new ArrayList<>();
+        camera = new Camera();
     }
 
     public static Scene getInstance() {

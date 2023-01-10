@@ -46,7 +46,7 @@ public abstract class GameObject {
         FloatBuffer transformBuffer = transform.getProjection();
 
         // Passing the transform matrix
-        int transformLocation = glGetUniformLocation(shaderProgram.getShaderProgramID(), "transform");
+        int transformLocation = glGetUniformLocation(shaderProgram.getShaderProgramID(), "model");
         glUniformMatrix4fv(transformLocation, false, transformBuffer);
     }
 
@@ -60,5 +60,9 @@ public abstract class GameObject {
 
     public Transform getTransform() {
         return transform;
+    }
+
+    public ShaderProgram getShaderProgram() {
+        return shaderProgram;
     }
 }

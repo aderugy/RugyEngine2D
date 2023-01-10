@@ -1,4 +1,4 @@
-package com.aderugy.rugyengine2d.gameobjects.images;
+package com.aderugy.rugyengine2d.gameobjects.textures;
 
 import com.aderugy.rugyengine2d.ResourceManager;
 import com.aderugy.rugyengine2d.gameobjects.GameObject;
@@ -6,7 +6,6 @@ import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.geom.Transform;
 import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Utils;
-import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 
 import java.nio.ByteBuffer;

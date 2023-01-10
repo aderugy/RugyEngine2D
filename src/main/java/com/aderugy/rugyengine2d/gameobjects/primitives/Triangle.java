@@ -1,4 +1,4 @@
-package com.aderugy.rugyengine2d.gameobjects.shapes;
+package com.aderugy.rugyengine2d.gameobjects.primitives;
 
 import com.aderugy.rugyengine2d.gameobjects.Color;
 import com.aderugy.rugyengine2d.geom.Position;

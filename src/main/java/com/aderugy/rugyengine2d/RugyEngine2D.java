@@ -66,7 +66,7 @@ public class RugyEngine2D {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will be resizable
 
         // Create the window
-        window = glfwCreateWindow(900, 650, "TEST PHASE", NULL, NULL);
+        window = glfwCreateWindow(800, 600, "TEST PHASE", NULL, NULL);
         if ( window == NULL )
             throw new RuntimeException("Failed to create the GLFW window");
 
