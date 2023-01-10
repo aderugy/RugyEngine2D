@@ -2,6 +2,7 @@ package com.aderugy.rugyengine2d.gameobjects.textures;
 
 import com.aderugy.rugyengine2d.ResourceManager;
 import com.aderugy.rugyengine2d.gameobjects.GameObject;
+import com.aderugy.rugyengine2d.gameobjects.materials.TextureMaterial;
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.geom.Transform;
 import com.aderugy.rugyengine2d.shaders.ShaderProgram;
@@ -33,6 +34,7 @@ public class Texture extends GameObject {
         super(shaderProgram);
 
         transform = new Transform(1, 1);
+        material = new TextureMaterial(filename, shaderProgram, 2, 4);
 
         Position texA = new Position(1.0f, 1.0f);
         Position texB = new Position(1.0f, 0.0f);
@@ -59,6 +61,7 @@ public class Texture extends GameObject {
     }
 
     @Override
+    @Deprecated
     protected float[] genData(Position[] pos) {
         float[] data = new float[4 * VERTEX_SIZE];
 

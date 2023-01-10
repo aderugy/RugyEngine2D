@@ -12,7 +12,6 @@ public class Scene {
     private ArrayList<GameObject> gameObjects;
     private Camera camera;
 
-
     private static Scene instance = null;
 
     public void drawComponents() {

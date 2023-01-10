@@ -1,5 +1,7 @@
 package com.aderugy.rugyengine2d.gameobjects;
 
+import com.aderugy.rugyengine2d.gameobjects.materials.ColorMaterial;
+import com.aderugy.rugyengine2d.gameobjects.materials.Material;
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.geom.Transform;
 import com.aderugy.rugyengine2d.shaders.ShaderProgram;
@@ -15,6 +17,7 @@ import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
 public abstract class GameObject {
     protected Transform transform;
+    protected Material material;
     protected ShaderProgram shaderProgram;
     protected int vaoID;
     protected int eboID;
