@@ -1,6 +1,7 @@
 package com.aderugy.rugyengine2d.gameobjects.textures;
 
 import com.aderugy.rugyengine2d.gameobjects.GameObject;
+import com.aderugy.rugyengine2d.gameobjects.materials.Material;
 import com.aderugy.rugyengine2d.gameobjects.materials.TextureMaterial;
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.geom.Transform;
@@ -16,22 +17,17 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30C.glBindVertexArray;
 
 public class TexturedCube extends GameObject {
-    private String filename;
 
-    public TexturedCube(ShaderProgram shaderProgram, String filename) {
-        super(shaderProgram);
-
-        this.filename = filename;
+    public TexturedCube(Material material) {
+        super(material);
 
         transform = new Transform(1, 1);
-        material = new TextureMaterial(filename, shaderProgram, 2, 36);
-
         render(null, null);
     }
 
     @Override
     public void draw() {
-        glUseProgram(shaderProgram.getShaderProgramID());
+        glUseProgram(material.getShaderProgram().getShaderProgramID());
         material.bind();
         glBindVertexArray(vaoID);
         glEnable(GL_DEPTH_TEST);
@@ -110,7 +106,7 @@ public class TexturedCube extends GameObject {
 
     @Override
     protected void render(Position[] data, int[] indices) {
-        glUseProgram(shaderProgram.getShaderProgramID());
+        glUseProgram(material.getShaderProgram().getShaderProgramID());
 
         // Binding VAO and VBO
         glBindVertexArray(vaoID);

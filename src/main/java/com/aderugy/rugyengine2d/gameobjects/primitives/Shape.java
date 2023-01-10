@@ -2,6 +2,7 @@ package com.aderugy.rugyengine2d.gameobjects.primitives;
 
 import com.aderugy.rugyengine2d.gameobjects.Color;
 import com.aderugy.rugyengine2d.gameobjects.GameObject;
+import com.aderugy.rugyengine2d.gameobjects.materials.Material;
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Utils;
@@ -16,25 +17,71 @@ import static org.lwjgl.opengl.GL30C.glBindVertexArray;
 
 public abstract class Shape extends GameObject {
     protected Color color;
-    protected Shape(ShaderProgram shaderProgram) {
-        super(shaderProgram);
-        this.color = new Color();
+    protected Shape(Material material) {
+        super(material);
     }
 
     @Override
     protected float[] genData(Position[] pos) {
-        float[] data = new float[pos.length * 7];
+        float[] vertices = new float[]{
+                -0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f,
+                0.5f, 0.5f, -0.5f,
 
-        for (int j = 0; j < pos.length; j++) {
-            int i = 7 * j;
+                0.5f, 0.5f, -0.5f,
+                -0.5f, 0.5f, -0.5f,
+                -0.5f, -0.5f, -0.5f,
 
-            data[i]     = pos[j].getX();
-            data[i + 1] = pos[j].getY();
-            data[i + 2] = 0;
-            data[i + 3] = color.getR();
-            data[i + 4] = color.getG();
-            data[i + 5] = color.getB();
-            data[i + 6] = color.getA();
+                -0.5f, -0.5f, 0.5f,
+                0.5f, -0.5f, 0.5f,
+                0.5f, 0.5f, 0.5f,
+
+                0.5f, 0.5f, 0.5f,
+                -0.5f, 0.5f, 0.5f,
+                -0.5f, -0.5f, 0.5f,
+
+                -0.5f, 0.5f, 0.5f,
+                -0.5f, 0.5f, -0.5f,
+                -0.5f, -0.5f, -0.5f,
+
+                -0.5f, -0.5f, -0.5f,
+                -0.5f, -0.5f, 0.5f,
+                -0.5f, 0.5f, 0.5f,
+
+                0.5f, 0.5f, 0.5f,
+                0.5f, 0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f,
+
+                0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, 0.5f,
+                0.5f, 0.5f, 0.5f,
+
+                -0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, -0.5f,
+                0.5f, -0.5f, 0.5f,
+
+                0.5f, -0.5f, 0.5f,
+                -0.5f, -0.5f, 0.5f,
+                -0.5f, -0.5f, -0.5f,
+
+                -0.5f, 0.5f, -0.5f,
+                0.5f, 0.5f, -0.5f,
+                0.5f, 0.5f, 0.5f,
+
+                0.5f, 0.5f, 0.5f,
+                -0.5f, 0.5f, 0.5f,
+                -0.5f, 0.5f, -0.5f
+        };
+
+        float[] materialData = material.getMaterialData();
+
+        float[] data = new float[materialData.length + vertices.length];
+        for (int i = 0; i < vertices.length / 3; i++) {
+            data[5 * i] = vertices[3 * i];
+            data[5 * i + 1] = vertices[3 * i + 1];
+            data[5 * i + 2] = vertices[3 * i + 2];
+            data[5 * i + 3] = materialData[2 * i];
+            data[5 * i + 4] = materialData[2 * i + 1];
         }
 
         return data;
@@ -51,15 +98,10 @@ public abstract class Shape extends GameObject {
 
         bindIndices(indices);
 
-        glVertexAttribPointer(0, 3,  GL_FLOAT, false, 7 * Float.BYTES, 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 7 * Float.BYTES, 0);
         glEnableVertexAttribArray(0);
 
-        glVertexAttribPointer(1, 4,  GL_FLOAT, false, 7 * Float.BYTES, 3 * Float.BYTES);
+        glVertexAttribPointer(1, 4, GL_FLOAT, false, 7 * Float.BYTES, 3 * Float.BYTES);
         glEnableVertexAttribArray(1);
-    }
-
-    protected Shape(ShaderProgram shaderProgram, Color color) {
-        super(shaderProgram);
-        this.color = color;
     }
 }

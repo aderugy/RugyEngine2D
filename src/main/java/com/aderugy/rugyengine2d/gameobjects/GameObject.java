@@ -1,10 +1,8 @@
 package com.aderugy.rugyengine2d.gameobjects;
 
-import com.aderugy.rugyengine2d.gameobjects.materials.ColorMaterial;
 import com.aderugy.rugyengine2d.gameobjects.materials.Material;
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.geom.Transform;
-import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 import com.aderugy.rugyengine2d.utils.Utils;
 
 import java.nio.FloatBuffer;
@@ -18,12 +16,12 @@ import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 public abstract class GameObject {
     protected Transform transform;
     protected Material material;
-    protected ShaderProgram shaderProgram;
     protected int vaoID;
     protected int eboID;
 
-    protected GameObject(ShaderProgram shaderProgram) {
-        this.shaderProgram = shaderProgram;
+    protected GameObject(Material material) {
+        this.material = material;
+
         vaoID = glGenVertexArrays();
         eboID = glGenBuffers();
     }
@@ -49,7 +47,7 @@ public abstract class GameObject {
         FloatBuffer transformBuffer = transform.getProjection();
 
         // Passing the transform matrix
-        int transformLocation = glGetUniformLocation(shaderProgram.getShaderProgramID(), "model");
+        int transformLocation = glGetUniformLocation(material.getShaderProgram().getShaderProgramID(), "model");
         glUniformMatrix4fv(transformLocation, false, transformBuffer);
     }
 
@@ -65,7 +63,7 @@ public abstract class GameObject {
         return transform;
     }
 
-    public ShaderProgram getShaderProgram() {
-        return shaderProgram;
+    public Material getMaterial() {
+        return material;
     }
 }

@@ -17,7 +17,7 @@ public class Scene {
     public void drawComponents() {
         for (GameObject component : gameObjects) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            camera.loadMatrices(component.getShaderProgram().getShaderProgramID());
+            camera.loadMatrices(component.getMaterial().getShaderProgram().getShaderProgramID());
             component.draw();
         }
     }

@@ -2,6 +2,7 @@ package com.aderugy.rugyengine2d.gameobjects.textures;
 
 import com.aderugy.rugyengine2d.ResourceManager;
 import com.aderugy.rugyengine2d.gameobjects.GameObject;
+import com.aderugy.rugyengine2d.gameobjects.materials.Material;
 import com.aderugy.rugyengine2d.gameobjects.materials.TextureMaterial;
 import com.aderugy.rugyengine2d.geom.Position;
 import com.aderugy.rugyengine2d.geom.Transform;
@@ -30,11 +31,10 @@ public class Texture extends GameObject {
     private Position[] positions;
     private static final int[] indices = new int[] { 0, 1, 3, 1, 2, 3 };
 
-    public Texture(ShaderProgram shaderProgram, String filename, Position a, Position b, Position c, Position d) {
-        super(shaderProgram);
+    public Texture(Material material, String filename, Position a, Position b, Position c, Position d) {
+        super(material);
 
         transform = new Transform(1, 1);
-        material = new TextureMaterial(filename, shaderProgram, 2, 4);
 
         Position texA = new Position(1.0f, 1.0f);
         Position texB = new Position(1.0f, 0.0f);
@@ -50,7 +50,7 @@ public class Texture extends GameObject {
 
     @Override
     public void draw() {
-        glUseProgram(shaderProgram.getShaderProgramID());
+        glUseProgram(material.getShaderProgram().getShaderProgramID());
         glBindTexture(GL_TEXTURE_2D, textureID);
         glBindVertexArray(vaoID);
 
@@ -81,7 +81,7 @@ public class Texture extends GameObject {
 
     @Override
     protected void render(Position[] vertexPositions, int[] indices) {
-        glUseProgram(shaderProgram.getShaderProgramID());
+        glUseProgram(material.getShaderProgram().getShaderProgramID());
 
         // Binding VAO and VBO
         glBindVertexArray(vaoID);
