@@ -28,3 +28,9 @@ Day6:
 - Refactoring: 
   - Component -> GameObject
   - ShaderManager -> ShaderProgram (not a singleton class anymore, each instance now corresponds to a shader program.
+Day7:
+- Added perspective!
+- Added view matrix (camera)
+- Added cubes (finally)
+- Added materials so that it is possible to give textures / colors to primitives (only working with cube at the moment)
+- There are still many hardcoded parts that I'd like to refactor before moving on, need to think about it
