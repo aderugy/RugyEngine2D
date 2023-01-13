@@ -34,3 +34,5 @@ Day7:
 - Added cubes (finally)
 - Added materials so that it is possible to give textures / colors to primitives (only working with cube at the moment)
 - There are still many hardcoded parts that I'd like to refactor before moving on, need to think about it
+Day8:
+- Started complete refactoring process. The point is to improve readability and scalability. I'll also add comments.
