@@ -22,7 +22,6 @@ public class Cube extends GameObject {
         transform = new Transform(1, 1);
         render(null, null);
     }
-
     @Override
     public void draw() {
         glUseProgram(material.getShaderProgram().getShaderProgramID());
@@ -101,7 +100,6 @@ public class Cube extends GameObject {
 
         return data;
     }
-
     @Override
     protected void render(Position[] data, int[] indices) {
         glUseProgram(material.getShaderProgram().getShaderProgramID());

@@ -1,7 +1,5 @@
 package com.aderugy.rugyengine2d.gameobjects.materials;
 
-import com.aderugy.rugyengine2d.gameobjects.vertices.Vertex;
-import com.aderugy.rugyengine2d.gameobjects.vertices.VertexData;
 import com.aderugy.rugyengine2d.shaders.ShaderProgram;
 
 public abstract class Material {
