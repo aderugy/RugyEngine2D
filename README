@@ -38,4 +38,5 @@ Day8:
 - Rewriting from scratch. The point is to improve readability and scalability. I'll also add comments.
 Day9:
 - Rewrote most of the project, it is now much cleaner
-- There are still many things to implement
+Day10:
+- Rectangles + texture refactored. Getting cleaner!
