@@ -6,8 +6,7 @@ import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
 
-import static org.lwjgl.opengl.GL20.glGetUniformLocation;
-import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
+import static org.lwjgl.opengl.GL20.*;
 
 public class Camera {
     private static final String VIEW_MATRIX_UNIFORM_LOCATION = "view";
@@ -22,6 +21,8 @@ public class Camera {
     }
 
     public void loadMatrices(int shaderProgramID) {
+        glUseProgram(shaderProgramID);
+
         int viewMatrixUniformLocation = glGetUniformLocation(shaderProgramID, VIEW_MATRIX_UNIFORM_LOCATION);
         FloatBuffer viewMatrixBuffer = BufferUtils.createFloatBuffer(16);
         viewMatrix.get(viewMatrixBuffer);
@@ -31,5 +32,7 @@ public class Camera {
         FloatBuffer projectionMatrixBuffer = BufferUtils.createFloatBuffer(16);
         projectionMatrix.get(projectionMatrixBuffer);
         glUniformMatrix4fv(projectionMatrixUniformLocation, false, projectionMatrixBuffer);
+
+        glUseProgram(0);
     }
 }

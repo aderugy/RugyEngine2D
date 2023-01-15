@@ -2,8 +2,10 @@ package com.aderugy.rugyengine3d.core;
 
 import com.aderugy.rugyengine3d.core.gameobjects.components.Material;
 import com.aderugy.rugyengine3d.core.gameobjects.components.materials.ColorMaterial;
+import com.aderugy.rugyengine3d.core.gameobjects.components.materials.TextureMaterial;
 import com.aderugy.rugyengine3d.core.gameobjects.fragmentdata.Vertex;
 import com.aderugy.rugyengine3d.core.gameobjects.fragmentdata.VertexData;
+import com.aderugy.rugyengine3d.core.gameobjects.primitives.Rectangle;
 import com.aderugy.rugyengine3d.core.gameobjects.primitives.Triangle;
 import com.aderugy.rugyengine3d.core.utils.ShaderManager;
 import org.lwjgl.Version;
@@ -62,16 +64,17 @@ public class Renderer {
 
         Vertex position = new Vertex(new VertexData(
                 new float[][]{
-                        {    0, 0, 0},
-                        { 0.5f, 1, 0},
-                        {    1, 0, 0}
+                        { 0, 0, 0}, // 0
+                        { 1, 0, 0}, // 1
+                        { 0, 1, 0}, // 2
+                        { 1, 1, 0}  // 3
                 }
         ));
-        Material material = new ColorMaterial(new Color(255, 255, 0));
+        Material material = new TextureMaterial("sprite.png");
 
         scene.addComponent(
-                new Triangle(
-                        ShaderManager.createShaderProgram("shape"),
+                new Rectangle(
+                        ShaderManager.createShaderProgram("texture"),
                         position,
                         material
                 )

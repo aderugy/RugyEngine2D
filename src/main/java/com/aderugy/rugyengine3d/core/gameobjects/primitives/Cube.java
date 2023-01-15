@@ -7,6 +7,6 @@ import com.aderugy.rugyengine3d.core.gameobjects.shaders.Shader;
 
 public class Cube extends GameObject {
     public Cube(Shader shader, Vertex position, Material material) {
-        super(shader, position, material);
+        super(shader, position, material, 36);
     }
 }

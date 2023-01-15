@@ -13,8 +13,7 @@ import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
  * The Vertex class allows
  */
 public final class Vertex {
-    private int totalLength;
-    private VertexData[] vertices;
+    private final VertexData[] vertices;
 
     /**
      * Creates a Vertex instance which contains and handles the data to be passed to OpenGL.
@@ -23,25 +22,22 @@ public final class Vertex {
      * @throws IllegalVertexDataException if no buffers have been passed ('vertices' is empty)
      */
     public Vertex(VertexData... vertices) {
-        int vertexCount = vertices.length;
+        int length = vertices.length;
 
         // 'vertices' is empty
-        if (vertexCount == 0)
+        if (length == 0)
             throw new IllegalVertexDataException();
 
-        int vertexStride = vertices[0].getVertexStride();
-        this.vertices = new VertexData[vertexCount];
+        int vertexCount = vertices[0].getVertexCount();
+        this.vertices = new VertexData[length];
 
-        this.totalLength = 0;
-
-        for (int i = 0; i < vertexCount; i++) {
+        for (int i = 0; i < length; i++) {
             VertexData current = vertices[i];
 
             // Checking if all VertexData contain the same amount of vertices
-            if (current.getVertexStride() != vertexStride)
+            if (current.getVertexCount() != vertexCount)
                 throw new IllegalVertexDataException();
 
-            this.totalLength += current.getLength();
             this.vertices[i] = current;
         }
     }

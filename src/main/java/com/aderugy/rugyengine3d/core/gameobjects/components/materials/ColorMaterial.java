@@ -6,7 +6,6 @@ import java.awt.*;
 
 public class ColorMaterial extends Material {
     public ColorMaterial(Color color) {
-
         this.data = new float[][] {
                 {
                         color.getRed() / 255.0f,
@@ -14,5 +13,20 @@ public class ColorMaterial extends Material {
                         color.getGreen() / 255.0f
                 }
         };
+    }
+
+    @Override
+    public void load() {
+
+    }
+
+    @Override
+    public void bind() {
+
+    }
+
+    @Override
+    public void unbind() {
+
     }
 }

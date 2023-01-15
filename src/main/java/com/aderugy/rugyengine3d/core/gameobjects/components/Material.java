@@ -23,4 +23,8 @@ public abstract class Material {
     public float[][] getData() {
         return this.data;
     }
+
+    public abstract void load();
+    public abstract void bind();
+    public abstract void unbind();
 }

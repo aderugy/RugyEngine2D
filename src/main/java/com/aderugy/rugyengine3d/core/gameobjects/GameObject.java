@@ -26,30 +26,26 @@ public abstract class GameObject {
     protected int[] indices;
     protected int vaoID;
     protected int eboID;
+    protected final int vertexCountUsingIndices;
 
-    public GameObject(Shader shader, Vertex position, Material material) {
+    public GameObject(Shader shader, Vertex position, Material material, int vertexCountUsingIndices) {
         this.shader = shader;
         this.position = position;
         this.transform = new Transform();
         this.material = material;
+        this.vertexCountUsingIndices = vertexCountUsingIndices;
 
         this.vaoID = glGenVertexArrays();
         this.eboID = glGenBuffers();
     }
 
     public void draw() {
-        glUseProgram(shader.getShaderProgram());
-        glBindVertexArray(vaoID);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboID);
+        bind();
 
         loadProjection();
+        glDrawElements(GL_TRIANGLES, vertexCountUsingIndices, GL_UNSIGNED_INT, 0);
 
-        glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
-
-        // Unbind everything
-        glUseProgram(0);
-        glBindVertexArray(0);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        unbind();
     }
 
     private int getVertexCount() {
@@ -57,8 +53,7 @@ public abstract class GameObject {
     }
 
     public void render() {
-        glUseProgram(shader.getShaderProgram());
-        glBindVertexArray(vaoID);
+        bind();
         genVboID();
 
         bindIndices(indices);
@@ -67,12 +62,11 @@ public abstract class GameObject {
         FloatBuffer bufferedData = vertexData.get();
         glBufferData(GL_ARRAY_BUFFER, bufferedData, GL_STATIC_DRAW);
 
+        material.load();
         vertexData.attribPointers();
 
         // Unbinding VAO, VBO and EBO
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
+        unbind();
     }
 
     public void loadProjection() {
@@ -83,16 +77,19 @@ public abstract class GameObject {
         glUniformMatrix4fv(transformLocation, false, transformBuffer);
     }
 
-    public int getVaoID() {
-        return vaoID;
+    public void bind() {
+        glUseProgram(shader.getShaderProgram());
+        glBindVertexArray(vaoID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboID);
+        material.bind();
     }
 
-    public int getEboID() {
-        return eboID;
-    }
-
-    public Transform getTransform() {
-        return transform;
+    public void unbind() {
+        material.unbind();
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindVertexArray(0);
+        glUseProgram(0);
     }
 
     public Material getMaterial() {
@@ -106,9 +103,7 @@ public abstract class GameObject {
 
     protected void bindIndices(int[] indices) {
         IntBuffer bufferedIndices = Utils.createIntBuffer(indices);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboID);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER,  bufferedIndices, GL_STATIC_DRAW);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
     public Shader getShader() {
