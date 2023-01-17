@@ -5,6 +5,7 @@ import com.aderugy.rugyengine3d.core.gameobjects.components.materials.ColorMater
 import com.aderugy.rugyengine3d.core.gameobjects.components.materials.TextureMaterial;
 import com.aderugy.rugyengine3d.core.gameobjects.fragmentdata.Vertex;
 import com.aderugy.rugyengine3d.core.gameobjects.fragmentdata.VertexData;
+import com.aderugy.rugyengine3d.core.gameobjects.primitives.Cube;
 import com.aderugy.rugyengine3d.core.gameobjects.primitives.Rectangle;
 import com.aderugy.rugyengine3d.core.gameobjects.primitives.Triangle;
 import com.aderugy.rugyengine3d.core.utils.ShaderManager;
@@ -62,18 +63,22 @@ public class Renderer {
         // Set the clear color
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
-        Vertex position = new Vertex(new VertexData(
-                new float[][]{
-                        { 0, 0, 0}, // 0
-                        { 1, 0, 0}, // 1
-                        { 0, 1, 0}, // 2
-                        { 1, 1, 0}  // 3
-                }
-        ));
+        float size = 0.5f;
+
+        Vertex position = new Vertex(new VertexData(new float[][]{
+                {0 , 0 , 0},
+                {0 , size , 0},
+                {size , size , 0},
+                {size , 0 , 0},
+                {0 , 0 , -size},
+                {0 , size , -size},
+                {size , size , -size},
+                {size , 0 , -size}
+        }));
         Material material = new TextureMaterial("sprite.png");
 
         scene.addComponent(
-                new Rectangle(
+                new Cube(
                         ShaderManager.createShaderProgram("texture"),
                         position,
                         material

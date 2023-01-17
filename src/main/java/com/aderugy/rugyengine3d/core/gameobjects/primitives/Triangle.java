@@ -6,12 +6,17 @@ import com.aderugy.rugyengine3d.core.gameobjects.fragmentdata.Vertex;
 import com.aderugy.rugyengine3d.core.gameobjects.shaders.Shader;
 
 public class Triangle extends GameObject {
-    {
+    public Triangle(Shader shader, Vertex position, Material material) {
+        super(shader, position, material);
+    }
+
+    @Override
+    protected void initIndices() {
         indices = new int[] {0, 1, 2};
     }
-    public Triangle(Shader shader, Vertex position, Material material) {
-        super(shader, position, material, 3);
 
-        render();
+    @Override
+    protected int getVertexCountUsingIndices() {
+        return 3;
     }
 }

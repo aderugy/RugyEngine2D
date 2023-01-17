@@ -18,39 +18,42 @@ import static org.lwjgl.opengl.GL30C.glBindVertexArray;
 public abstract class GameObject {
     private static final String MODEL_UNIFORM_LOCATION = "model";
 
-    private Vertex position;
-    private Transform transform;
-    private Material material;
-    private Shader shader;
+    protected Vertex position;
+    protected Transform transform;
+    protected Material material;
+    protected Shader shader;
 
     protected int[] indices;
     protected int vaoID;
     protected int eboID;
-    protected final int vertexCountUsingIndices;
 
-    public GameObject(Shader shader, Vertex position, Material material, int vertexCountUsingIndices) {
+    public GameObject(Shader shader, Vertex position, Material material) {
         this.shader = shader;
         this.position = position;
         this.transform = new Transform();
         this.material = material;
-        this.vertexCountUsingIndices = vertexCountUsingIndices;
+
+        this.initIndices();
 
         this.vaoID = glGenVertexArrays();
         this.eboID = glGenBuffers();
+
+        this.render();
     }
+
+    protected abstract void initIndices();
 
     public void draw() {
         bind();
 
+        glEnable(GL_DEPTH_TEST);
         loadProjection();
-        glDrawElements(GL_TRIANGLES, vertexCountUsingIndices, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, getVertexCountUsingIndices(), GL_UNSIGNED_INT, 0);
 
         unbind();
     }
 
-    private int getVertexCount() {
-        return position.getVertexCount();
-    }
+    protected abstract int getVertexCountUsingIndices();
 
     public void render() {
         bind();
