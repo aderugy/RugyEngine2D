@@ -27,7 +27,7 @@ public abstract class GameObject {
     protected int vaoID;
     protected int eboID;
 
-    public GameObject(Shader shader, Vertex position, Material material) {
+    protected GameObject(Shader shader, Vertex position, Material material) {
         this.shader = shader;
         this.position = position;
         this.transform = new Transform();
@@ -111,5 +111,9 @@ public abstract class GameObject {
 
     public Shader getShader() {
         return shader;
+    }
+
+    public Transform getTransform() {
+        return transform;
     }
 }

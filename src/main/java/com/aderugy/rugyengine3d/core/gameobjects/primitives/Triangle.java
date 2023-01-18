@@ -6,7 +6,7 @@ import com.aderugy.rugyengine3d.core.gameobjects.fragmentdata.Vertex;
 import com.aderugy.rugyengine3d.core.gameobjects.shaders.Shader;
 
 public class Triangle extends GameObject {
-    public Triangle(Shader shader, Vertex position, Material material) {
+    protected Triangle(Shader shader, Vertex position, Material material) {
         super(shader, position, material);
     }
 

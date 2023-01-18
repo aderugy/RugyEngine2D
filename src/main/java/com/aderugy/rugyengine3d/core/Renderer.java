@@ -6,8 +6,10 @@ import com.aderugy.rugyengine3d.core.gameobjects.components.materials.TextureMat
 import com.aderugy.rugyengine3d.core.gameobjects.fragmentdata.Vertex;
 import com.aderugy.rugyengine3d.core.gameobjects.fragmentdata.VertexData;
 import com.aderugy.rugyengine3d.core.gameobjects.primitives.Cube;
+import com.aderugy.rugyengine3d.core.gameobjects.primitives.Primitives;
 import com.aderugy.rugyengine3d.core.gameobjects.primitives.Rectangle;
 import com.aderugy.rugyengine3d.core.gameobjects.primitives.Triangle;
+import com.aderugy.rugyengine3d.core.gameobjects.shaders.Shader;
 import com.aderugy.rugyengine3d.core.utils.ShaderManager;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -43,7 +45,7 @@ public class Renderer {
     public void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-        scene.drawComponents();
+        scene.drawComponents(window);
 
         // Preparing next images rendering
     }
@@ -63,27 +65,12 @@ public class Renderer {
         // Set the clear color
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
-        float size = 0.5f;
+        Shader shader = ShaderManager.createShaderProgram(refactor"shape");
+        Material material = new ColorMaterial(Color.RED);
 
-        Vertex position = new Vertex(new VertexData(new float[][]{
-                {0 , 0 , 0},
-                {0 , size , 0},
-                {size , size , 0},
-                {size , 0 , 0},
-                {0 , 0 , -size},
-                {0 , size , -size},
-                {size , size , -size},
-                {size , 0 , -size}
-        }));
-        Material material = new TextureMaterial("sprite.png");
+        Triangle triangle = Primitives.triangle(shader, material, 0, 0, 0.5f, 1, 1, 0, -1);
 
-        scene.addComponent(
-                new Cube(
-                        ShaderManager.createShaderProgram("texture"),
-                        position,
-                        material
-                )
-        );
+        scene.addComponent(triangle);
     }
 
     /**

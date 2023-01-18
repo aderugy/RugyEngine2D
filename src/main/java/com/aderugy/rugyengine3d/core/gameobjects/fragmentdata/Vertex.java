@@ -1,7 +1,7 @@
 package com.aderugy.rugyengine3d.core.gameobjects.fragmentdata;
 
-import com.aderugy.rugyengine2d.utils.Utils;
 import com.aderugy.rugyengine3d.core.exceptions.IllegalVertexDataException;
+import com.aderugy.rugyengine3d.core.utils.Utils;
 
 import java.nio.FloatBuffer;
 

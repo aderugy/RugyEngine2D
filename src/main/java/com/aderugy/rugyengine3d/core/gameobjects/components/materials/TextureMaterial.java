@@ -16,15 +16,72 @@ public class TextureMaterial extends Material {
     private final int textureID;
     private final String filename;
 
+    public static final float[][] RECTANGLE = new float[][] {
+            { 0, 0 },
+            { 0, 1 },
+            { 1, 1 },
+            { 1, 0 }
+    };
+    public static final float[][] UNIFORMLY_TEXTURED_CUBE = new float[][] {
+            { 0, 0 },
+            { 1, 0 },
+            { 1, 1 },
+            { 1, 1 },
+            { 0, 1 },
+            { 0, 0 },
+
+            { 0, 0 },
+            { 1, 0 },
+            { 1, 1 },
+            { 1, 1 },
+            { 0, 1 },
+            { 0, 0 },
+
+            { 1, 0 },
+            { 1, 1 },
+            { 0, 1 },
+            { 0, 1 },
+            { 0, 0 },
+            { 1, 0 },
+
+            { 1, 0 },
+            { 1, 1 },
+            { 0, 1 },
+            { 0, 1 },
+            { 0, 0 },
+            { 1, 0 },
+
+            { 0, 1 },
+            { 1, 1 },
+            { 1, 0 },
+            { 1, 0 },
+            { 0, 0 },
+            { 0, 1 },
+
+            { 0, 1 },
+            { 1, 1 },
+            { 1, 0 },
+            { 1, 0 },
+            { 0, 0 },
+            { 0, 1 },
+    };
+
     public TextureMaterial(String filename) {
         data = new float[][] {
                 { 0, 0 },
                 { 1, 0 },
-                { 0, 1 },
+                { 1, 1 },
                 { 1, 1 },
                 { 0, 1 },
                 { 0, 0 }
         };
+
+        this.textureID = glGenTextures();
+        this.filename = filename;
+    }
+
+    public TextureMaterial(String filename, float[][] data) {
+        this.data = data;
 
         this.textureID = glGenTextures();
         this.filename = filename;

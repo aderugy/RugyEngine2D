@@ -22,7 +22,7 @@ public final class ShaderManager
      * @return Shader instance that contains the GL Shader Program ID
      */
     public static Shader createShaderProgram(String name) {
-        int vertexID = compile(com.aderugy.rugyengine2d.ResourceManager.getShader(name, ".vert"), GL_VERTEX_SHADER);
+        int vertexID = compile(ResourceManager.getShader(name, ".vert"), GL_VERTEX_SHADER);
         int fragmentID = compile(ResourceManager.getShader(name, ".frag"), GL_FRAGMENT_SHADER);
 
         Shader shader = link(new int[] {vertexID, fragmentID});
