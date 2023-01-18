@@ -40,3 +40,8 @@ Day9:
 - Rewrote most of the project, it is now much cleaner
 Day10:
 - Rectangles + texture refactored. Getting cleaner!
+Day11:
+- Finished rewriting the project.
+- Added a 'Primitives' factory -> creating primitives is now very easy
+- Fixed materials that wouldn't work
+- I have to improve the cube rendering (currently I don't use indices)
