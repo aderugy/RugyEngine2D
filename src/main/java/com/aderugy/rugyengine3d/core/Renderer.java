@@ -65,7 +65,7 @@ public class Renderer {
         // Set the clear color
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
-        Shader shader = ShaderManager.createShaderProgram(refactor"shape");
+        Shader shader = ShaderManager.createShaderProgram("shape");
         Material material = new ColorMaterial(Color.RED);
 
         Triangle triangle = Primitives.triangle(shader, material, 0, 0, 0.5f, 1, 1, 0, -1);
