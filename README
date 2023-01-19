@@ -4,45 +4,45 @@ Starting date: January 1st, 2023
 Each day corresponds to a day of work.
 
 Progression:
-Day1:
-- Discovering LWJGL
-- Drew red triangles.
-Day2:
-- Added a ResourceManager class to centralize the access to resources files
-- Added linux natives dependencies in the gradle build
-- The vertex shader can now take a color parameter. We can therefore draw nice rainbow triangles!
-- Rendered triangles of textures (ugly code, has to be refactored next time)
-Day3:
-- Improved readability and cleaned the code
-- Created a 'component' package: everything that will be drawn will be a component.
-- Generalized image rendering
-Day4:
-- Learning about linear algebra, matrices: vital to understand the component transformations
-Day5:
-- Added JOML (math library)
-- Project stepped up: going 3D
-- Added a Transform class that will handle the coordinates , dimensions and coordinates of my game objects.
-- I really have to refactor this, it's getting messy with the new projection stuff
-Day6:
-- Refactoring: 
-  - Component -> GameObject
-  - ShaderManager -> ShaderProgram (not a singleton class anymore, each instance now corresponds to a shader program.
-  - Transform operations cleaned
-Day7:
-- Added perspective!
-- Added view matrix (camera)
-- Added cubes (finally)
-- Added materials so that it is possible to give textures / colors to primitives (only working with cube at the moment)
-- There are still many hardcoded parts that I'd like to refactor before moving on, need to think about it
-Day8:
-- Rewriting from scratch. The point is to improve readability and scalability. I'll also add comments.
-Day9:
-- Rewrote most of the project, it is now much cleaner
-Day10:
-- Rectangles + texture refactored. Getting cleaner!
 Day11:
 - Finished rewriting the project.
 - Added a 'Primitives' factory -> creating primitives is now very easy
 - Fixed materials that wouldn't work
 - I have to improve the cube rendering (currently I don't use indices)
 - Added camera movements! (very ugly code at the moment, I will implement an input manager soon, I dont't really know how though...)
+Day10:
+- Rectangles + texture refactored. Getting cleaner!
+Day9:
+- Rewrote most of the project, it is now much cleaner
+Day8:
+- Rewriting from scratch. The point is to improve readability and scalability. I'll also add comments.
+Day7:
+- Added perspective!
+- Added view matrix (camera)
+- Added cubes (finally)
+- Added materials so that it is possible to give textures / colors to primitives (only working with cube at the moment)
+- There are still many hardcoded parts that I'd like to refactor before moving on, need to think about it
+Day6:
+- Refactoring: 
+  - Component -> GameObject
+  - ShaderManager -> ShaderProgram (not a singleton class anymore, each instance now corresponds to a shader program.
+  - Transform operations cleaned
+Day5:
+- Added JOML (math library)
+- Project stepped up: going 3D
+- Added a Transform class that will handle the coordinates , dimensions and coordinates of my game objects.
+- I really have to refactor this, it's getting messy with the new projection stuff
+Day4:
+- Learning about linear algebra, matrices: vital to understand the component transformations
+Day3:
+- Improved readability and cleaned the code
+- Created a 'component' package: everything that will be drawn will be a component.
+- Generalized image rendering
+Day2:
+- Added a ResourceManager class to centralize the access to resources files
+- Added linux natives dependencies in the gradle build
+- The vertex shader can now take a color parameter. We can therefore draw nice rainbow triangles!
+- Rendered triangles of textures (ugly code, has to be refactored next time)
+Day1:
+- Discovering LWJGL
+- Drew red triangles.
