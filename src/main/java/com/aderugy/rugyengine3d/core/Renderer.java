@@ -65,11 +65,10 @@ public class Renderer {
         // Set the clear color
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
-        Shader shader = ShaderManager.createShaderProgram("shape");
-        Material material = new ColorMaterial(Color.RED);
+        Shader shader = ShaderManager.createShaderProgram("texture");
+        Material material = new TextureMaterial("sprite.png");
 
-        Triangle triangle = Primitives.triangle(shader, material, 0, 0, 0.5f, 1, 1, 0, -1);
-
+        Cube triangle = Primitives.cube(shader, material, 1, -0.5f, -0.5f, -0.5f);
         scene.addComponent(triangle);
     }
 
