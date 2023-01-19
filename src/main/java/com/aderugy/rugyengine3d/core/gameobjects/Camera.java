@@ -64,4 +64,8 @@ public class Camera {
     public Vector3f getCameraUp() {
         return cameraUp;
     }
+
+    public void setCameraFront(Vector3f cameraFront) {
+        this.cameraFront = cameraFront;
+    }
 }

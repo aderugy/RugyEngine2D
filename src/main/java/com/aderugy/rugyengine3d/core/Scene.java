@@ -13,7 +13,6 @@ import static org.lwjgl.opengl.GL11.*;
 public class Scene {
     private Camera camera;
     private ArrayList<GameObject> gameObjects;
-    private static final float SPEED = 0.1f;
 
     public Scene() {
         this.gameObjects = new ArrayList<>();

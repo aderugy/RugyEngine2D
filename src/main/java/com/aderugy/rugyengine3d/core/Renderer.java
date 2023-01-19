@@ -112,6 +112,9 @@ public class Renderer {
             camera.getCameraPosition().sub(result);
         });
 
+        InputHandler.getInstance().setMouseInput(camera, 0.1f);
+        InputHandler.getInstance().setCursorVisibility(GLFW_CURSOR_DISABLED);
+
         Cube triangle = Primitives.cube(shader, material, 1, -0.5f, -0.5f, -0.5f);
         scene.addComponent(triangle);
         // --------------------------------------------------------------- TESTS
