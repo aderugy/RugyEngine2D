@@ -1,5 +1,6 @@
 package com.aderugy.rugyengine3d.core;
 
+import com.aderugy.rugyengine3d.core.gameobjects.Camera;
 import com.aderugy.rugyengine3d.core.gameobjects.components.Material;
 import com.aderugy.rugyengine3d.core.gameobjects.components.materials.ColorMaterial;
 import com.aderugy.rugyengine3d.core.gameobjects.components.materials.TextureMaterial;
@@ -11,13 +12,13 @@ import com.aderugy.rugyengine3d.core.gameobjects.primitives.Rectangle;
 import com.aderugy.rugyengine3d.core.gameobjects.primitives.Triangle;
 import com.aderugy.rugyengine3d.core.gameobjects.shaders.Shader;
 import com.aderugy.rugyengine3d.core.utils.ShaderManager;
+import org.joml.Vector3f;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 
-import java.awt.*;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -45,9 +46,7 @@ public class Renderer {
     public void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-        scene.drawComponents(window);
-
-        // Preparing next images rendering
+        scene.drawComponents();
     }
 
     /**
@@ -65,11 +64,57 @@ public class Renderer {
         // Set the clear color
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
+        // --------------------------------------------------------------- TESTS
         Shader shader = ShaderManager.createShaderProgram("texture");
         Material material = new TextureMaterial("sprite.png");
 
+        Camera camera = scene.getCamera();
+
+        final float cameraSpeed = 0.1f;
+
+        InputHandler.getInstance().addOnKeyPressedEventListener(GLFW_KEY_W, () -> {
+            Vector3f result = new Vector3f();
+            camera.getCameraFront().mul(cameraSpeed, result);
+            camera.getCameraPosition().add(result);
+        });
+
+        InputHandler.getInstance().addOnKeyPressedEventListener(GLFW_KEY_S, () -> {
+            Vector3f result = new Vector3f();
+            camera.getCameraFront().mul(cameraSpeed, result);
+            camera.getCameraPosition().sub(result);
+        });
+
+        InputHandler.getInstance().addOnKeyPressedEventListener(GLFW_KEY_A, () -> {
+            Vector3f result = new Vector3f();
+            camera.getCameraFront().cross(camera.getCameraUp(), result);
+            result.normalize();
+            result.mul(cameraSpeed);
+            camera.getCameraPosition().sub(result);
+        });
+
+        InputHandler.getInstance().addOnKeyPressedEventListener(GLFW_KEY_D, () -> {
+            Vector3f result = new Vector3f();
+            camera.getCameraFront().cross(camera.getCameraUp(), result);
+            result.normalize();
+            result.mul(cameraSpeed);
+            camera.getCameraPosition().add(result);
+        });
+
+        InputHandler.getInstance().addOnKeyPressedEventListener(GLFW_KEY_SPACE, () -> {
+            Vector3f result = new Vector3f();
+            camera.getCameraUp().mul(cameraSpeed, result);
+            camera.getCameraPosition().add(result);
+        });
+
+        InputHandler.getInstance().addOnKeyPressedEventListener(GLFW_KEY_LEFT_SHIFT, () -> {
+            Vector3f result = new Vector3f();
+            camera.getCameraUp().mul(cameraSpeed, result);
+            camera.getCameraPosition().sub(result);
+        });
+
         Cube triangle = Primitives.cube(shader, material, 1, -0.5f, -0.5f, -0.5f);
         scene.addComponent(triangle);
+        // --------------------------------------------------------------- TESTS
     }
 
     /**
@@ -147,6 +192,9 @@ public class Renderer {
 
         // Flipping the open gl images on load (so they are not inverted when rendering)
         stbi_set_flip_vertically_on_load(true);
+
+        // Creating the InputHandler
+        InputHandler.init(window);
     }
 
     /**
@@ -159,17 +207,15 @@ public class Renderer {
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         while (!glfwWindowShouldClose(window)) {
-
             // Rendering
             this.render();
             glfwSwapBuffers(window);
 
+            // Process inputs
+            InputHandler.getInstance().processOnKeyPressedEvents();
+
             // Calling events that happened during the last iteration
             glfwPollEvents();
         }
-    }
-
-    public Scene getScene() {
-        return scene;
     }
 }
