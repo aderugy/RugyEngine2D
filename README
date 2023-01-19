@@ -45,3 +45,4 @@ Day11:
 - Added a 'Primitives' factory -> creating primitives is now very easy
 - Fixed materials that wouldn't work
 - I have to improve the cube rendering (currently I don't use indices)
+- Added camera movements! (very ugly code at the moment, I will implement an input manager soon, I dont't really know how though...)
